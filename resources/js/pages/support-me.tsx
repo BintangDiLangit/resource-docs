@@ -16,7 +16,7 @@ const items = [
     },
     {
         id: 2,
-        imageUrl: '/images/SHOPEE.PNG',
+        imageUrl: '/images/SHOPEE.png',
         name: 'Bintang Miftaqul Huda.',
         icon: IconBrandJustd,
         description: 'Shopee'

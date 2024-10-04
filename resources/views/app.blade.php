@@ -15,20 +15,20 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Bintang Miftaqul Huda - Software Engineer">
+    <meta property="og:title" content="Docs - Bintang Miftaqul Huda">
     <meta property="og:description"
         content="Documentation and Resources of Bintang Miftaqul Huda - BINTANGMFHD">
-    <meta property="og:image" content="https://is3.cloudhost.id/portfolio123/storage/seo/64e0bb014746fpueucwmxjg.webp">
-    <meta property="og:url" content="https://bintangmfhd.com/">
+    <meta property="og:image" content="https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png">
+    <meta property="og:url" content="https://docs.bintangmfhd.com/">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://bintangmfhd.com/">
-    <meta property="twitter:title" content="Bintang Miftaqul Huda - Software Engineer">
+    <meta property="twitter:url" content="https://docs.bintangmfhd.com/">
+    <meta property="twitter:title" content="Docs - Bintang Miftaqul Huda">
     <meta property="twitter:description"
         content="Documentation and Resources of Bintang Miftaqul Huda - BINTANGMFHD">
     <meta property="twitter:image"
-        content="https://is3.cloudhost.id/portfolio123/storage/main_image/main_image64de2f2450993xw9d1.jpg">
+        content="https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png">
 
     <!-- SEO Meta -->
     <meta name="keywords"
@@ -39,8 +39,8 @@
     <link rel="canonical" href="https://bintangmfhd.com/">
 
     <!--Favicon-->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://bintangmfhd.com/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://bintangmfhd.com/assets/images/favicon-16x16.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
