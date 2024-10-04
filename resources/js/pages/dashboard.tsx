@@ -1,7 +1,6 @@
 import { PagePropsData } from '@/types/index'
 import { Head } from '@inertiajs/react'
 import { Container } from 'components/container'
-import { AppLayout } from 'layouts'
 import { Card } from 'ui'
 
 export default function Dashboard({ auth }: PagePropsData) {
@@ -15,5 +14,3 @@ export default function Dashboard({ auth }: PagePropsData) {
         </>
     )
 }
-
-Dashboard.layout = (page: any) => <AppLayout children={page} />
