@@ -27,9 +27,9 @@ interface SupportMeProps {
     sidebarSections: SidebarSection[]
     projects: Project[]
 }
-const Home = ({ sidebarSections, projects }: SupportMeProps) => {
+const Home = ({ projects }: SupportMeProps) => {
     return (
-        <AppLayout sidebarSections={sidebarSections} projects={projects}>
+        <AppLayout projects={projects}>
             <Header title="Support Me" />
             <Container>
                 <div className="overflow-hidden rounded-lg border lg:border-border border-transparent">
