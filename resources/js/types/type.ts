@@ -25,7 +25,6 @@ export interface Project {
 
 export interface AppLayoutProps {
     children: React.ReactNode
-    sidebarSections: SidebarSection[]
     projects: Project[]
 }
 
@@ -34,7 +33,7 @@ export const iconMap: { [key: string]: FC<SVGProps<SVGSVGElement>> } = {
     IconCreditCard: IconCreditCard
 }
 
-export const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+export const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
 
 export interface Page {
     id: number

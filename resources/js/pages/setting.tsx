@@ -13,7 +13,7 @@ interface SettingProps {
 
 const Setting: React.FC<SettingProps> = ({ title, content, sidebarSections, projects }) => {
     return (
-        <AppLayout sidebarSections={sidebarSections} projects={projects}>
+        <AppLayout projects={projects}>
             <Head title="Setting" />
             <div className="container mx-auto p-4">
                 <h1 className="text-3xl font-bold mb-4">{title}</h1>

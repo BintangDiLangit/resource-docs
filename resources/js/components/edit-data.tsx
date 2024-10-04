@@ -59,6 +59,7 @@ const EditDataComponent: React.FC<EditDataProps> = ({ sidebarSections }) => {
                     ) : (
                         <p>No sidebar sections available.</p>
                     )}
+
                     {/* Render Form for Selected Sidebar Item and Page */}
                     {selectedSidebarItem && (
                         <div className="mt-8">
