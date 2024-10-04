@@ -20,9 +20,9 @@ interface HomeProps {
     projects: Project[]
 }
 
-const Home = ({ sidebarSections, projects }: HomeProps) => {
+const Home = ({ projects }: HomeProps) => {
     return (
-        <AppLayout sidebarSections={sidebarSections} projects={projects}>
+        <AppLayout projects={projects}>
             <Header title="BINTANGMFHD Resources" />
             <Container>
                 <div className="overflow-hidden rounded-lg border lg:border-border border-transparent">
