@@ -5,8 +5,6 @@ import { Head, usePage } from '@inertiajs/react'
 import { IconPencilBox, IconTrash } from 'justd-icons'
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import rehypeHighlight from 'rehype-highlight'
-import rehypeRaw from 'rehype-raw'
 import { Button, Form, Modal, TextField } from 'ui'
 import '../../css/markdown-content.css'
 
@@ -109,7 +107,7 @@ const Page: React.FC<PageProps> = ({ page, projects }) => {
                 </h1>
 
                 {/* Render Markdown content */}
-                <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeHighlight]} className="markdown-content">
+                <ReactMarkdown className="markdown">
                     {page.content}
                 </ReactMarkdown>
             </div>
