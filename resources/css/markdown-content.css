@@ -1,3 +1,23 @@
 .markdown > * {
-  all: revert;
+    all: revert;
 }
+
+/* Custom styles for code blocks */
+.markdown pre,
+.markdown code {
+    background-color: #1e1e1e; /* Dark background color */
+    color: #c5c5c5; /* Light text color */
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.markdown pre {
+    border: 1px solid #333;
+}
+
+.markdown code {
+    font-family: Consolas, 'Courier New', monospace;
+}
+
+/* Style for the code block wrapper and the copy button */

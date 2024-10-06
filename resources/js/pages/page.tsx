@@ -2,9 +2,13 @@ import { AppLayout } from '@/layouts/app-layout'
 import { PagePropsData } from '@/types'
 import { csrfToken, Page as pagetype, Project, SidebarSection } from '@/types/type'
 import { Head, usePage } from '@inertiajs/react'
+import 'highlight.js/styles/github.css'
 import { IconPencilBox, IconTrash } from 'justd-icons'
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
 import { Button, Form, Modal, TextField } from 'ui'
 import '../../css/markdown-content.css'
 
@@ -105,9 +109,13 @@ const Page: React.FC<PageProps> = ({ page, projects }) => {
                         </span>
                     )}
                 </h1>
-
                 {/* Render Markdown content */}
-                <ReactMarkdown className="markdown">
+                <ReactMarkdown
+                    className="markdown"
+                    rehypePlugins={[rehypeRaw, rehypeHighlight]}
+                    remarkPlugins={[remarkGfm]}
+                    components={{}}
+                >
                     {page.content}
                 </ReactMarkdown>
             </div>
