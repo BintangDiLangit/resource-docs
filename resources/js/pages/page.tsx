@@ -92,7 +92,27 @@ const Page: React.FC<PageProps> = ({ page, projects }) => {
 
     return (
         <AppLayout projects={projects}>
-            <Head title={page.title} />
+            <Head>
+                <title>{page.title} - BINTANGMFHD</title>
+                <meta name="description" content={page.content.slice(0, 150)} />
+                <meta property="og:title" content={page.title} />
+                <meta property="og:description" content={page.content.slice(0, 150)} />
+                <meta
+                    property="og:image"
+                    content="https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png"
+                />
+                <meta property="og:url" content={`https://docs.bintangmfhd.com/page/${page.slug}`} />
+                <meta
+                    name="keywords"
+                    content={`default, keywords, for, the, ${page.title}, bintangmfhd, bintang miftaqul huda`}
+                />
+                <meta name="twitter:title" content={page.title} />
+                <meta name="twitter:description" content={page.content.slice(0, 150)} />
+                <meta
+                    name="twitter:image"
+                    content="https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png"
+                />
+            </Head>
             <div className="container mx-auto p-4">
                 <h1 className="text-3xl font-bold mb-4 flex items-center">
                     {page.title}{' '}
