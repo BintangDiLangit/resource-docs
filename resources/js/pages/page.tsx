@@ -90,24 +90,24 @@ const Page: React.FC<PageProps> = ({ page, projects }) => {
         })
     }
 
+    const metaDescription =
+        page?.content?.slice(0, 150) ||
+        'Welcome to BINTANGMFHD documentation, where you will find useful resources on development.'
+
     return (
         <AppLayout projects={projects}>
             <Head>
-                <title>{page.title} - BINTANGMFHD</title>
-                <meta name="description" content={page.content.slice(0, 150)} />
-                <meta property="og:title" content={page.title} />
-                <meta property="og:description" content={page.content.slice(0, 150)} />
+                <title>{page?.title ? `${page.title} - BINTANGMFHD` : 'BINTANGMFHD - Documentation'}</title>
+                <meta name="description" content={metaDescription} />
+                <meta property="og:title" content={page?.title || 'BINTANGMFHD Documentation'} />
+                <meta property="og:description" content={metaDescription} />
                 <meta
                     property="og:image"
                     content="https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png"
                 />
-                <meta property="og:url" content={`https://docs.bintangmfhd.com/page/${page.slug}`} />
-                <meta
-                    name="keywords"
-                    content={`default, keywords, for, the, ${page.title}, bintangmfhd, bintang miftaqul huda`}
-                />
-                <meta name="twitter:title" content={page.title} />
-                <meta name="twitter:description" content={page.content.slice(0, 150)} />
+                <meta property="og:url" content={`https://docs.bintangmfhd.com/page/${page?.id || ''}`} />
+                <meta name="twitter:title" content={page?.title || 'BINTANGMFHD Documentation'} />
+                <meta name="twitter:description" content={metaDescription} />
                 <meta
                     name="twitter:image"
                     content="https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png"
