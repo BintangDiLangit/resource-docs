@@ -110,6 +110,7 @@ const Page: React.FC<PageProps> = ({ page, projects }) => {
                     )}
                 </h1>
                 {/* Render Markdown content */}
+                <hr style={{ borderTop: '3px solid #ccc', margin: '20px 0' }} />
                 <ReactMarkdown
                     className="markdown"
                     rehypePlugins={[rehypeRaw, rehypeHighlight]}

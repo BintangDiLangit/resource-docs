@@ -105,3 +105,19 @@
     margin-bottom: 1rem; /* Add space after headings */
     color: white; /* Heading styles */
 }
+
+.markdown ul,
+.markdown ol {
+    margin-top: 1rem; /* Space above the list */
+    margin-bottom: 1rem; /* Space below the list */
+}
+
+.markdown li {
+    margin-bottom: 0.75rem; /* Space between list items */
+}
+
+.markdown p,
+.markdown code {
+    margin-bottom: 0.75rem; /* Space between paragraphs and inline code */
+    padding: 0.2rem 0.4rem; /* Add padding for inline code */
+}
