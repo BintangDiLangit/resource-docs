@@ -1,23 +1,107 @@
 .markdown > * {
     all: revert;
+    margin-bottom: 1.5rem;
 }
 
-/* Custom styles for code blocks */
 .markdown pre,
 .markdown code {
-    background-color: #1e1e1e; /* Dark background color */
-    color: #c5c5c5; /* Light text color */
-    padding: 10px;
-    border-radius: 5px;
+    background-color: #161c22;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
     overflow-x: auto;
+    font-size: 1rem;
 }
 
+/* Code block specific adjustments */
 .markdown pre {
-    border: 1px solid #333;
+    border: 1px solid #444;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    white-space: pre-wrap;
+    line-height: 1.6;
 }
 
 .markdown code {
-    font-family: Consolas, 'Courier New', monospace;
+    font-family: 'Fira Code', Consolas, 'Courier New', monospace;
+    font-weight: 400;
+}
+.hljs {
+    display: block !important;
+    overflow-x: auto !important;
+    padding: 0.5em !important;
 }
 
-/* Style for the code block wrapper and the copy button */
+.hljs-comment,
+.hljs-quote {
+    color: #5c6370 !important;
+    font-style: italic !important;
+}
+
+.hljs-doctag,
+.hljs-formula,
+.hljs-keyword {
+    color: #c678dd !important;
+}
+
+.hljs-deletion,
+.hljs-name,
+.hljs-section,
+.hljs-selector-tag,
+.hljs-subst {
+    color: #e06c75 !important;
+}
+
+.hljs-literal {
+    color: #56b6c2 !important;
+}
+
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string,
+.hljs-regexp,
+.hljs-string {
+    color: #98c379 !important;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title {
+    color: #e6c07b !important;
+}
+
+.hljs-attr,
+.hljs-number,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-pseudo,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable {
+    color: lightblue !important;
+}
+
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-symbol,
+.hljs-title {
+    color: #61aeee !important;
+}
+
+.hljs-emphasis {
+    font-style: italic !important;
+}
+
+.hljs-strong {
+    font-weight: 700 !important;
+}
+
+/* Headings */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+    margin-top: 2rem; /* Add space before headings */
+    margin-bottom: 1rem; /* Add space after headings */
+    color: white; /* Heading styles */
+}
