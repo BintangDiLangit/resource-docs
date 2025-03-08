@@ -11,31 +11,76 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] })
     const [sidebarSections, setSidebarSections] = useState<SidebarSection[]>([])
     const [sidebarLoading, setSidebarLoading] = useState(true)
 
-    useEffect(() => {
-        fetchSidebarData()
-    }, [])
+    const [searchQuery, setSearchQuery] = useState('')
 
+    /**
+     * Fetch the entire sidebar data (e.g., on page load)
+     */
     const fetchSidebarData = async () => {
         try {
-            setSidebarLoading(true)
-            const response = await fetch('/sidebar-data', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': csrfToken || ''
-                }
-            })
-            if (!response.ok) {
-                throw new Error('Failed to fetch sidebar data')
+        setSidebarLoading(true)
+        const response = await fetch('/sidebar-data', {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken || ''
             }
-            const data = await response.json()
-            setSidebarSections(data)
+        })
+        if (!response.ok) {
+            throw new Error('Failed to fetch sidebar data')
+        }
+        const data = await response.json()
+        setSidebarSections(data)
         } catch (error) {
-            console.error('Failed to fetch sidebar data:', error)
+        console.error('Failed to fetch sidebar data:', error)
         } finally {
-            setSidebarLoading(false)
+        setSidebarLoading(false)
         }
     }
+
+
+    /**
+     * Fetch the server-side filtered data based on searchQuery
+     */
+    const fetchSearchData = async (query: string) => {
+        try {
+        setSidebarLoading(true)
+        // Send the search query to /search, adjust the route/params as needed
+        const response = await fetch(`/search?query=${encodeURIComponent(query)}`, {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken || ''
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Failed to fetch search results')
+        }
+        const data = await response.json()
+        // Update the sidebar with filtered data from the server
+        setSidebarSections(data)
+        } catch (error) {
+        console.error('Search error:', error)
+        } finally {
+        setSidebarLoading(false)
+        }
+    }
+
+    /**
+     * Whenever searchQuery changes, decide whether to show the full list or fetch filtered data
+    */
+    useEffect(() => {
+        if (searchQuery.trim() === '') {
+        // If search is empty, restore the full sidebar data
+        fetchSidebarData()
+        } else {
+        // Otherwise fetch server-side filtered data
+        fetchSearchData(searchQuery)
+        }
+        // We only want to trigger this when `searchQuery` changes
+        // so we leave fetchSidebarData out of the dependency array
+        // to avoid re-fetching the full list unnecessarily
+    }, [searchQuery])
 
     const handleLogout = async () => {
         try {
@@ -49,6 +94,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] })
 
             if (response.ok) {
                 console.log('Logged out successfully')
+                window.location.reload()
             } else {
                 console.error('Logout failed')
             }
@@ -56,6 +102,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] })
             console.error('Error during logout:', error)
         }
     }
+
     const handleLogin = async () => {
         try {
             const response = await fetch('/login', {
@@ -69,10 +116,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] })
             if (response.ok) {
                 window.location.href = '/login'
             } else {
-                console.error('Logout failed')
+                console.error('Login failed')
             }
         } catch (error) {
-            console.error('Error during logout:', error)
+            console.error('Error during login:', error)
         }
     }
 
@@ -108,7 +155,13 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] })
                                 <IconBitcoin />
                                 <strong>BINTANGMFHD</strong>
                             </Link>
-                            <SearchField aria-label="Search" placeholder="Search" className={'pt-5'} />
+                            <SearchField
+                                aria-label="Search"
+                                placeholder="Search"
+                                className="pt-5"
+                                value={searchQuery}
+                                onChange={(value: string) => setSearchQuery(value)}
+                            />
                         </Aside.Header>
 
                         <Aside.Content>

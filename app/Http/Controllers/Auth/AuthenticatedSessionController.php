@@ -10,18 +10,29 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\URL;
 
 class AuthenticatedSessionController extends Controller
 {
+    private function defaultSeo(): array
+    {
+        return [
+            'title'       => 'Docs Bintang Miftaqul Huda - BINTANGMFHD',
+            'description' => 'Welcome to BINTANGMFHD documentation, where you will find useful resources on development.',
+            'image'       => "https://bintangmfhd.s3.ap-southeast-3.amazonaws.com/photos/1/Tech/64e0bb014746fpueucwmxjg.png",
+            'url'         => URL::current() ?? '/',
+        ];
+    }
     /**
      * Display the login view.
      */
     public function create(): Response
     {
+        $serverSeo       = $this->defaultSeo();
         return Inertia::render('auth/login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
-        ]);
+        ])->withViewData(compact('serverSeo'));
     }
 
     /**

@@ -23,6 +23,7 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/support-me', [PageController::class, 'supportMe'])->name('support.me');
 Route::get('/page/{slug}', [PageController::class, 'show'])->where('slug', '.*')->name('page.show');
 Route::get('/sidebar-data', [PageController::class, 'getSidebarData']);
+Route::get('/search', [PageController::class, 'search']);
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dev.php';

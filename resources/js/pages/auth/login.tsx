@@ -18,8 +18,9 @@ export default function Login(args: LoginProps) {
 
     const submit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
-
-        post(route('login'))
+        post(route('login'), {
+            onSuccess: () => window.location.reload(),
+        });
     }
 
     return (
