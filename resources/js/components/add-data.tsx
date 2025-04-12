@@ -2,9 +2,11 @@
 
 import { Button, Select, TextField } from '@/components/ui'
 import MDEditor from '@uiw/react-md-editor'
-import React, { useEffect, useState } from 'react'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 
-import { csrfToken, SidebarItem, SidebarSection } from '@/types/type'
+import type { SidebarItem, SidebarSection } from '@/types/type'
+import { csrfToken } from '@/types/type'
 import { router } from '@inertiajs/react'
 import { toast } from 'sonner'
 import { Loader } from './ui/loader'
@@ -73,7 +75,7 @@ const AddDataComponent: React.FC<AddDataProps> = ({ sidebarSections }) => {
             .then((data) => {
                 if (data.success) {
                     router.reload({
-                        onSuccess: () => toast.success(`Page was updated`)
+                        onSuccess: () => toast.success('Page was updated')
                     })
                 } else {
                     toast.error('Failed to update the content')

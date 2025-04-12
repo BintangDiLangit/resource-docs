@@ -14,6 +14,11 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/article-ai', [PageController::class, 'articleAi'])->name('article-ai');
+    Route::post('/generate-article', [PageController::class, 'generateArticleFromPrompt']);
+    Route::post('/article/create-or-update', [PageController::class, 'createOrUpdate'])->name('article.create-or-update');
+
     Route::get('/settings', [PageController::class, 'setting'])->name('setting');
     Route::get('/settings/get-page/{sidebarItemId}', [PageController::class, 'getPageBySidebarItem'])->name('setting.get-page');
     Route::post('/settings/update-page', [PageController::class, 'createOrUpdate'])->name('setting.update-page');

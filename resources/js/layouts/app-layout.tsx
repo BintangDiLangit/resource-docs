@@ -1,9 +1,12 @@
 import { Loader } from '@/components/ui/loader'
-import { PagePropsData } from '@/types'
-import { AppLayoutProps, csrfToken, iconMap, SidebarSection } from '@/types/type'
+import type { PagePropsData } from '@/types'
+import type { AppLayoutProps, SidebarSection } from '@/types/type'
+import { iconMap } from '@/types/type'
+import { csrfToken } from '@/types/type'
 import { usePage } from '@inertiajs/react'
-import { IconBell, IconBitcoin, IconLogout, IconPerson, IconSearch, IconSettings } from 'justd-icons'
-import React, { useEffect, useState } from 'react'
+import { IconBell, IconBitcoin, IconBrain, IconLogout, IconPerson, IconSearch, IconSettings } from 'justd-icons'
+import type React from 'react'
+import { useEffect, useState }  from 'react'
 import { Toaster } from 'sonner'
 import { Aside, Avatar, Button, Link, Menu, SearchField } from 'ui'
 export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] }) => {
@@ -214,6 +217,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, projects = [] })
                                         <Menu.Item href="/settings">
                                             <IconSettings />
                                             Settings
+                                        </Menu.Item>
+                                        <Menu.Item href="/article-ai">
+                                            <IconBrain />
+                                            Article AI
                                         </Menu.Item>
                                         <Menu.Separator />
                                         <Menu.Item href="#" onAction={handleLogout}>

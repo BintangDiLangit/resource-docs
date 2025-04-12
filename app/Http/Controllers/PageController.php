@@ -7,6 +7,8 @@ use App\Models\SidebarItem;
 use App\Models\SidebarSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
@@ -279,5 +281,58 @@ class PageController extends Controller
         });
 
         return response()->json($transformed);
+    }
+
+    public function articleAi()
+    {
+        $sidebarSections = SidebarSection::with('sidebarItems')->get();
+        $serverSeo       = $this->defaultSeo();
+    
+        return Inertia::render('article-ai', [
+            'title'           => 'AI Article Generator',
+            'content'         => '',
+            'sidebarSections' => $sidebarSections,
+            'projects'        => $this->defaultProjects(),
+        ])->withViewData(compact('serverSeo'));
+    }
+
+    public function generateArticleFromPrompt(Request $request)
+    {
+        $request->validate([
+            'prompt' => 'required|string|min:5',
+        ]);
+
+        $prompt = $request->input('prompt');
+
+        try {
+            $response = Http::withToken(env('OPENAI_API_KEY'))
+            ->post('https://api.openai.com/v1/chat/completions', [
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'system', 'content' => 'You are a helpful assistant that writes well-structured articles in Markdown format.'],
+                    ['role' => 'user', 'content' => <<<EOT
+Write a markdown article based on the following prompt:
+
+"{$prompt}"
+
+The article must start with:
+- A title (use "# [Title]")
+- A header image (use Markdown ![]() syntax)
+- Then continue with the article content.
+Make it look clean, developer-friendly, and professional.
+EOT],
+                ],
+                'temperature' => 0.7,
+                'max_tokens' => 1000,
+            ]);
+            Log::info($response);
+
+            $generated = $response->json()['choices'][0]['message']['content'] ?? '';
+
+            return response()->json(['markdown' => $generated]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
