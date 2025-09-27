@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/article-ai', [PageController::class, 'articleAi'])->name('article-ai');
     Route::post('/generate-article', [PageController::class, 'generateArticleFromPrompt']);
+    Route::post('/auto-generate-article', [PageController::class, 'autoGenerateArticle']);
     Route::post('/article/create-or-update', [PageController::class, 'createOrUpdate'])->name('article.create-or-update');
 
     Route::get('/settings', [PageController::class, 'setting'])->name('setting');
@@ -29,6 +30,18 @@ Route::get('/support-me', [PageController::class, 'supportMe'])->name('support.m
 Route::get('/page/{slug}', [PageController::class, 'show'])->where('slug', '.*')->name('page.show');
 Route::get('/sidebar-data', [PageController::class, 'getSidebarData']);
 Route::get('/search', [PageController::class, 'search']);
+
+// Test route for Z.AI integration (remove in production)
+Route::get('/test-zai', function () {
+    $apiKey = config('services.zai.api_key');
+    $baseUrl = config('services.zai.base_url');
+    
+    return response()->json([
+        'api_key_configured' => !empty($apiKey),
+        'base_url' => $baseUrl,
+        'message' => $apiKey ? 'Z.AI is configured' : 'Z.AI API key not found in config'
+    ]);
+});
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dev.php';

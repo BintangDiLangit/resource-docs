@@ -305,34 +305,181 @@ class PageController extends Controller
         $prompt = $request->input('prompt');
 
         try {
-            $response = Http::withToken(env('OPENAI_API_KEY'))
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . config('services.zai.api_key'),
+                'Content-Type' => 'application/json',
+                'Accept-Language' => 'en-US,en'
+            ])->post(config('services.zai.base_url') . '/chat/completions', [
+                'model' => 'glm-4.5',
                 'messages' => [
                     ['role' => 'system', 'content' => 'You are a helpful assistant that writes well-structured articles in Markdown format.'],
                     ['role' => 'user', 'content' => <<<EOT
-Write a markdown article based on the following prompt:
+Write a complete, comprehensive markdown article based on the following prompt:
 
 "{$prompt}"
 
-The article must start with:
-- A title (use "# [Title]")
-- A header image (use Markdown ![]() syntax)
-- Then continue with the article content.
-Make it look clean, developer-friendly, and professional.
+Requirements:
+- Start with a compelling title (use "# [Title]")
+- Include a relevant header image (use Markdown ![]() syntax with a professional tech image from Unsplash)
+- Write a complete article with at least 4-5 main sections
+- Include practical examples, code snippets, or real-world applications where relevant
+- End with a proper conclusion
+- Make it informative, engaging, and professional
+- Minimum 800 words, aim for 1200-1500 words
+- Use proper markdown formatting with headers, lists, and emphasis
+- Ensure the article is complete and doesn't end abruptly
+
+Write the full, complete article now:
 EOT],
                 ],
                 'temperature' => 0.7,
-                'max_tokens' => 1000,
+                'max_tokens' => 2000,
+                'stream' => false,
             ]);
-            Log::info($response);
+            
+            Log::info('Z.AI API Response: ', $response->json());
 
-            $generated = $response->json()['choices'][0]['message']['content'] ?? '';
+            $responseData = $response->json();
+            $generated = $responseData['choices'][0]['message']['content'] ?? '';
 
             return response()->json(['markdown' => $generated]);
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Z.AI API Error: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function autoGenerateArticle()
+    {
+        try {
+            // Generate a random prompt for automatic article generation
+            $prompts = [
+                'Latest trends in web development',
+                'Introduction to machine learning for beginners',
+                'Best practices for database optimization',
+                'Modern JavaScript frameworks comparison',
+                'Cloud computing benefits and challenges',
+                'Cybersecurity tips for developers',
+                'API design principles and best practices',
+                'Mobile app development strategies',
+                'DevOps culture and practices',
+                'Artificial intelligence in business applications'
+            ];
+
+            $randomPrompt = $prompts[array_rand($prompts)];
+            
+            Log::info('Auto-generating article with prompt: ' . $randomPrompt);
+
+            $apiKey = config('services.zai.api_key');
+            $baseUrl = config('services.zai.base_url');
+            
+            Log::info('Z.AI API Configuration - Key exists: ' . (!empty($apiKey) ? 'Yes' : 'No') . ', Base URL: ' . $baseUrl);
+            
+            if (empty($apiKey)) {
+                Log::error('Z.AI API key is not configured');
+                return response()->json(['error' => 'Z.AI API key is not configured'], 500);
+            }
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $apiKey,
+                'Content-Type' => 'application/json',
+                'Accept-Language' => 'en-US,en'
+            ])->post($baseUrl . '/chat/completions', [
+                'model' => 'glm-4.5',
+                'messages' => [
+                    ['role' => 'system', 'content' => 'You are a helpful assistant that writes well-structured articles in Markdown format.'],
+                    ['role' => 'user', 'content' => <<<EOT
+Write a complete, comprehensive markdown article based on the following prompt:
+
+"{$randomPrompt}"
+
+Requirements:
+- Start with a compelling title (use "# [Title]")
+- Include a relevant header image (use Markdown ![]() syntax with a professional tech image from Unsplash)
+- Write a complete article with at least 4-5 main sections
+- Include practical examples, code snippets, or real-world applications where relevant
+- End with a proper conclusion
+- Make it informative, engaging, and professional
+- Minimum 800 words, aim for 1200-1500 words
+- Use proper markdown formatting with headers, lists, and emphasis
+- Ensure the article is complete and doesn't end abruptly
+
+Write the full, complete article now:
+EOT],
+                ],
+                'temperature' => 0.7,
+                'max_tokens' => 2000,
+                'stream' => false,
+            ]);
+            
+            Log::info('Z.AI API Response Status: ' . $response->status());
+            Log::info('Z.AI API Response Body: ' . $response->body());
+            
+            if (!$response->successful()) {
+                Log::error('Z.AI API request failed with status: ' . $response->status() . ', body: ' . $response->body());
+                return response()->json(['error' => 'API request failed: ' . $response->status() . ' - ' . $response->body()], 500);
+            }
+            
+            $responseData = $response->json();
+            Log::info('Z.AI API Response Data: ', $responseData);
+            
+            $generated = $responseData['choices'][0]['message']['content'] ?? '';
+            Log::info('Generated content length: ' . strlen($generated));
+            Log::info('Generated content preview: ' . substr($generated, 0, 200) . '...');
+
+            if (!empty($generated)) {
+                // Get or create sidebar section for AI-generated articles
+                $aiSection = SidebarSection::firstOrCreate(
+                    ['title_section' => 'Latest Tech Insights'],
+                    ['title_section' => 'Latest Tech Insights']
+                );
+
+                // Get or create sidebar item for this article
+                $sidebarItem = SidebarItem::firstOrCreate(
+                    [
+                        'sidebar_section_id' => $aiSection->id,
+                        'title' => $this->extractTitleFromMarkdown($generated)
+                    ],
+                    [
+                        'sidebar_section_id' => $aiSection->id,
+                        'title' => $this->extractTitleFromMarkdown($generated),
+                        'url' => '/page/' . $this->generateSlug($this->extractTitleFromMarkdown($generated)),
+                        'is_current' => false
+                    ]
+                );
+
+                // Create a new page with the generated content
+                $page = Page::create([
+                    'sidebar_item_id' => $sidebarItem->id,
+                    'title' => $this->extractTitleFromMarkdown($generated),
+                    'content' => $generated,
+                    'slug' => $this->generateSlug($this->extractTitleFromMarkdown($generated)),
+                    'meta_description' => 'Auto-generated article about ' . $randomPrompt,
+                ]);
+
+                Log::info('Auto-generated article created successfully with ID: ' . $page->id . ', Sidebar Item ID: ' . $sidebarItem->id);
+                return response()->json(['success' => true, 'message' => 'Article generated successfully', 'article_id' => $page->id]);
+            }
+
+            Log::error('Generated content is empty. Response structure: ', $responseData);
+            return response()->json(['error' => 'Generated content is empty'], 500);
+        } catch (\Exception $e) {
+            Log::error('Auto-generation exception: ' . $e->getMessage());
+            Log::error('Auto-generation exception trace: ' . $e->getTraceAsString());
+            return response()->json(['error' => 'Exception: ' . $e->getMessage()], 500);
+        }
+    }
+
+    private function extractTitleFromMarkdown($markdown)
+    {
+        if (preg_match('/^#\s+(.+)$/m', $markdown, $matches)) {
+            return trim($matches[1]);
+        }
+        return 'Auto-Generated Article - ' . date('Y-m-d H:i:s');
+    }
+
+    private function generateSlug($title)
+    {
+        return 'auto-' . strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $title)) . '-' . time();
     }
 }

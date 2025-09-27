@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'zai' => [
+        'api_key' => env('ZAI_API_KEY'),
+        'base_url' => env('ZAI_BASE_URL', 'https://api.z.ai/api/paas/v4'),
+    ],
+
 ];
