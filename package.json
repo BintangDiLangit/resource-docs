@@ -29,13 +29,15 @@
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "release-it": "^17.6.0",
+        "shadcn": "^3.4.0",
         "tailwindcss": "^3.4.10",
-        "typescript": "^5.6.2",
+        "typescript": "^5.9.2",
         "vite": "^5.4.8",
         "vite-plugin-watch": "^0.3.1"
     },
     "dependencies": {
         "@uiw/react-md-editor": "^4.0.4",
+        "caniuse-lite": "^1.0.30001748",
         "clsx": "^2.1.1",
         "framer-motion": "^11.5.4",
         "justd-icons": "^1.4.45",

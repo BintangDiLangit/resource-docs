@@ -1,3 +1,6 @@
+@import './collapsible-sidebar.css';
+@import './markdown-editor.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -33,6 +33,10 @@
     <meta name="google" content="notranslate">
     <link rel="canonical" href="{{ $serverSeo['url'] ?? 'https://docs.bintangmfhd.com/' }}">
 
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6910825338601925"
+        crossorigin="anonymous"></script>
+
     <!--Favicon-->
     <link rel="icon" type="image/png" sizes="32x32" href="https://bintangmfhd.com/assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://bintangmfhd.com/assets/images/favicon-16x16.png">

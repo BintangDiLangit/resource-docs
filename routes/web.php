@@ -15,15 +15,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Article Management
     Route::get('/article-ai', [PageController::class, 'articleAi'])->name('article-ai');
+    Route::get('/article/create', [PageController::class, 'createArticle'])->name('article.create');
     Route::post('/generate-article', [PageController::class, 'generateArticleFromPrompt']);
     Route::post('/auto-generate-article', [PageController::class, 'autoGenerateArticle']);
     Route::post('/article/create-or-update', [PageController::class, 'createOrUpdate'])->name('article.create-or-update');
-
-    Route::get('/settings', [PageController::class, 'setting'])->name('setting');
-    Route::get('/settings/get-page/{sidebarItemId}', [PageController::class, 'getPageBySidebarItem'])->name('setting.get-page');
-    Route::post('/settings/update-page', [PageController::class, 'createOrUpdate'])->name('setting.update-page');
-    Route::post('/settings/update-sidebar-item', [PageController::class, 'updateSidebarItem'])->name('setting.update-sidebar-item');
+    Route::get('/article/{id}/edit', [PageController::class, 'editArticle'])->name('article.edit');
+    
+    // Settings routes (deprecated - functionality moved to dashboard)
+    // Route::get('/settings', [PageController::class, 'setting'])->name('setting');
+    // Route::get('/settings/get-page/{sidebarItemId}', [PageController::class, 'getPageBySidebarItem'])->name('setting.get-page');
+    // Route::post('/settings/update-page', [PageController::class, 'createOrUpdate'])->name('setting.update-page');
+    // Route::post('/settings/update-sidebar-item', [PageController::class, 'updateSidebarItem'])->name('setting.update-sidebar-item');
 });
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/support-me', [PageController::class, 'supportMe'])->name('support.me');

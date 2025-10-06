@@ -1,5 +1,3 @@
-'use client'
-
 import { Button, Select, TextField } from '@/components/ui'
 import MDEditor from '@uiw/react-md-editor'
 import type React from 'react'

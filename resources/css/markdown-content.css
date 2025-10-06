@@ -1,30 +1,159 @@
+/* Enhanced Markdown Styling */
+.markdown {
+    line-height: 1.7;
+    color: hsl(var(--fg));
+    max-width: none;
+}
+
 .markdown > * {
     all: revert;
     margin-bottom: 1.5rem;
 }
 
-.markdown pre,
-.markdown code {
-    background-color: #161c22;
-    color: white;
-    padding: 12px;
-    border-radius: 6px;
-    overflow-x: auto;
-    font-size: 1rem;
-}
-
-/* Code block specific adjustments */
-.markdown pre {
-    border: 1px solid #444;
-    margin-top: 1.5rem;
+/* Typography Improvements */
+.markdown h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
-    white-space: pre-wrap;
-    line-height: 1.6;
+    color: hsl(var(--fg));
+    border-bottom: 3px solid hsl(var(--primary));
+    padding-bottom: 0.5rem;
+    position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
-.markdown code {
-    font-family: 'Fira Code', Consolas, 'Courier New', monospace;
-    font-weight: 400;
+.markdown h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: hsl(var(--fg));
+    border-bottom: 2px solid hsl(var(--border));
+    padding-bottom: 0.25rem;
+}
+
+.markdown h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: hsl(var(--fg));
+}
+
+.markdown h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--fg));
+}
+
+.markdown h5,
+.markdown h6 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--fg));
+}
+
+/* Paragraph Styling */
+.markdown p {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+    color: hsl(var(--fg));
+}
+
+/* Enhanced Code Blocks */
+.markdown pre {
+    position: relative;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    margin: 2rem 0;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.markdown pre code {
+    display: block;
+    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: hsl(var(--fg));
+    overflow-x: auto;
+}
+
+/* Code Block Header */
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: hsl(var(--tertiary));
+    border-bottom: 1px solid hsl(var(--border));
+    font-size: 0.875rem;
+    color: hsl(var(--muted-fg));
+}
+
+.code-block-language {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.code-block-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.copy-button {
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: hsl(var(--fg));
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.copy-button:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-fg));
+    transform: translateY(-1px);
+}
+
+.copy-button.copied {
+    background: hsl(var(--success));
+    color: hsl(var(--success-fg));
+}
+
+/* Inline Code */
+.markdown code:not(pre code) {
+    background: hsl(var(--secondary));
+    color: hsl(var(--primary));
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 0.875em;
+    font-weight: 500;
+    border: 1px solid hsl(var(--border));
 }
 .hljs {
     display: block !important;
@@ -97,27 +226,200 @@
     font-weight: 700 !important;
 }
 
-/* Headings */
-.markdown h1,
-.markdown h2,
-.markdown h3 {
-    margin-top: 2rem; /* Add space before headings */
-    margin-bottom: 1rem; /* Add space after headings */
-    color: white; /* Heading styles */
-}
-
+/* Lists */
 .markdown ul,
 .markdown ol {
-    margin-top: 1rem; /* Space above the list */
-    margin-bottom: 1rem; /* Space below the list */
+    margin: 1.5rem 0;
+    padding-left: 2rem;
 }
 
 .markdown li {
-    margin-bottom: 0.75rem; /* Space between list items */
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
 }
 
-.markdown p,
-.markdown code {
-    margin-bottom: 0.75rem; /* Space between paragraphs and inline code */
-    padding: 0.2rem 0.4rem; /* Add padding for inline code */
+.markdown ul li {
+    list-style-type: none;
+    position: relative;
+}
+
+.markdown ul li::before {
+    content: "•";
+    color: hsl(var(--primary));
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+}
+
+.markdown ol {
+    counter-reset: item;
+}
+
+.markdown ol li {
+    counter-increment: item;
+    list-style: none;
+    position: relative;
+}
+
+.markdown ol li::before {
+    content: counter(item) ".";
+    color: hsl(var(--primary));
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+    min-width: 1.5rem;
+}
+
+/* Blockquotes */
+.markdown blockquote {
+    border-left: 4px solid hsl(var(--primary));
+    background: hsl(var(--secondary));
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: hsl(var(--muted-fg));
+    position: relative;
+}
+
+.markdown blockquote::before {
+    content: '"';
+    font-size: 4rem;
+    color: hsl(var(--primary));
+    position: absolute;
+    top: -0.5rem;
+    left: 0.5rem;
+    opacity: 0.3;
+    font-family: serif;
+}
+
+/* Tables */
+.markdown table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: hsl(var(--tertiary));
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.markdown th,
+.markdown td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.markdown th {
+    background: hsl(var(--secondary));
+    font-weight: 600;
+    color: hsl(var(--fg));
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+}
+
+.markdown tr:hover {
+    background: hsl(var(--secondary));
+}
+
+/* Links */
+.markdown a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.markdown a:hover {
+    border-bottom-color: hsl(var(--primary));
+    text-decoration: none;
+}
+
+/* Horizontal Rules */
+.markdown hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+    margin: 3rem 0;
+}
+
+/* Images */
+.markdown img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert Boxes */
+.markdown .alert {
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    border-left: 4px solid;
+    position: relative;
+}
+
+.markdown .alert-info {
+    background: hsl(var(--info) / 0.1);
+    border-left-color: hsl(var(--info));
+    color: hsl(var(--info));
+}
+
+.markdown .alert-warning {
+    background: hsl(var(--warning) / 0.1);
+    border-left-color: hsl(var(--warning));
+    color: hsl(var(--warning));
+}
+
+.markdown .alert-success {
+    background: hsl(var(--success) / 0.1);
+    border-left-color: hsl(var(--success));
+    color: hsl(var(--success));
+}
+
+.markdown .alert-danger {
+    background: hsl(var(--danger) / 0.1);
+    border-left-color: hsl(var(--danger));
+    color: hsl(var(--danger));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .markdown h1 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+    }
+    
+    .markdown h2 {
+        font-size: 1.5rem;
+    }
+    
+    .markdown h3 {
+        font-size: 1.25rem;
+    }
+    
+    .markdown pre {
+        margin: 1rem -1rem;
+        border-radius: 0;
+    }
+    
+    .markdown pre code {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .code-block-header {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .markdown h1 {
+        font-size: 2rem;
+        line-height: 1.25;
+    }
 }

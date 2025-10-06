@@ -1,5 +1,5 @@
 import { useTheme } from '@/components/theme-provider'
-import { IconCheck, IconCircleInfoFill, IconTriangleInfoFill } from 'justd-icons'
+import { IconCheck, IconCircleInfoFill } from 'justd-icons'
 import { Toaster as ToasterPrimitive, type ToasterProps } from 'sonner'
 import { twJoin } from 'tailwind-merge'
 
@@ -15,8 +15,8 @@ const Toast = ({ ...props }: ToasterProps) => {
             icons={{
                 info: <IconCircleInfoFill />,
                 success: <IconCheck />,
-                warning: <IconTriangleInfoFill />,
-                error: <IconTriangleInfoFill />,
+                warning: <IconCircleInfoFill />,
+                error: <IconCircleInfoFill />,
                 loading: <Loader variant="spin" />
             }}
             toastOptions={{

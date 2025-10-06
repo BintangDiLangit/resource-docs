@@ -1,0 +1,207 @@
+/* Collapsible Sidebar Styles */
+
+/* Base sidebar styles with CSS custom properties */
+:root {
+    --sidebar-expanded-width: 17rem;
+    --sidebar-collapsed-width: 4rem;
+    --sidebar-width: 17rem; /* Default value */
+}
+
+/* Use the dynamic CSS custom property */
+[style*="--sidebar-width"] [class*="w-[17rem]"] {
+    width: var(--sidebar-width) !important;
+    min-width: var(--sidebar-width) !important;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out !important;
+}
+
+[style*="--sidebar-width"] main[class*="lg:pl-[17rem]"] {
+    padding-left: var(--sidebar-width) !important;
+    transition: padding-left 0.3s ease-in-out !important;
+}
+
+/* Target the specific Aside component classes */
+.sidebar-collapsed [class*="fixed"][class*="inset-y-0"][class*="left-0"][class*="w-[17rem]"] {
+    width: var(--sidebar-collapsed-width) !important;
+    min-width: var(--sidebar-collapsed-width) !important;
+    max-width: var(--sidebar-collapsed-width) !important;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out !important;
+}
+
+.sidebar-expanded [class*="fixed"][class*="inset-y-0"][class*="left-0"][class*="w-[17rem]"] {
+    width: var(--sidebar-expanded-width) !important;
+    min-width: var(--sidebar-expanded-width) !important;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out !important;
+}
+
+/* Adjust main content margin using CSS custom properties */
+.sidebar-collapsed main[class*="lg:pl-[17rem]"] {
+    padding-left: var(--sidebar-collapsed-width) !important;
+    transition: padding-left 0.3s ease-in-out !important;
+}
+
+.sidebar-expanded main[class*="lg:pl-[17rem]"] {
+    padding-left: var(--sidebar-expanded-width) !important;
+    transition: padding-left 0.3s ease-in-out !important;
+}
+
+/* Alternative approach - override Tailwind's width utility directly */
+.sidebar-collapsed [class*="w-[17rem]"] {
+    width: var(--sidebar-collapsed-width) !important;
+    transition: width 0.3s ease-in-out !important;
+}
+
+.sidebar-expanded [class*="w-[17rem]"] {
+    width: var(--sidebar-expanded-width) !important;
+    transition: width 0.3s ease-in-out !important;
+}
+
+/* More aggressive targeting for all potential selectors */
+.sidebar-collapsed [style*="width: 17rem"],
+.sidebar-collapsed [style*="width:17rem"] {
+    width: var(--sidebar-collapsed-width) !important;
+}
+
+.sidebar-expanded [style*="width: 17rem"],
+.sidebar-expanded [style*="width:17rem"] {
+    width: var(--sidebar-expanded-width) !important;
+}
+
+/* Ensure the sidebar container gets the right classes */
+.sidebar-collapsed [data-slot="aside"],
+.sidebar-collapsed aside {
+    width: var(--sidebar-collapsed-width) !important;
+    min-width: var(--sidebar-collapsed-width) !important;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out !important;
+}
+
+.sidebar-expanded [data-slot="aside"],
+.sidebar-expanded aside {
+    width: var(--sidebar-expanded-width) !important;
+    min-width: var(--sidebar-expanded-width) !important;
+    transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out !important;
+}
+
+/* Smooth transition for sidebar content */
+.sidebar-collapsed .sidebar-content {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-expanded .sidebar-content {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hide text content when collapsed */
+.sidebar-collapsed .sidebar-text {
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    transition: opacity 0.2s ease, max-width 0.3s ease;
+}
+
+.sidebar-expanded .sidebar-text {
+    opacity: 1;
+    max-width: 200px;
+    transition: opacity 0.3s ease 0.1s, max-width 0.3s ease;
+}
+
+/* Collapsed navigation icons */
+.collapsed-nav-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 8px;
+    border-top: 1px solid var(--border);
+}
+
+.collapsed-nav-icon {
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collapsed-nav-icon:hover {
+    background-color: var(--secondary);
+}
+
+/* Toggle button animation */
+.sidebar-toggle-btn {
+    transition: transform 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Desktop-only collapsible behavior */
+@media (min-width: 1024px) {
+    /* Ultra-specific targeting to override Tailwind */
+    .sidebar-collapsed .relative.isolate.flex.min-h-svh.w-full.max-lg\\:flex-col > div:first-child {
+        width: 4rem !important;
+        min-width: 4rem !important;
+        max-width: 4rem !important;
+        transition: width 0.3s ease-in-out !important;
+    }
+    
+    .sidebar-expanded .relative.isolate.flex.min-h-svh.w-full.max-lg\\:flex-col > div:first-child {
+        width: 17rem !important;
+        min-width: 17rem !important;
+        transition: width 0.3s ease-in-out !important;
+    }
+    
+    /* Target any element with sidebar width */
+    .sidebar-collapsed [style*="--sidebar-width"] * {
+        width: var(--sidebar-width, 4rem) !important;
+        min-width: var(--sidebar-width, 4rem) !important;
+    }
+    
+    /* Brutally override any fixed width element in collapsed state */
+    .sidebar-collapsed > * > * {
+        width: 4rem !important;
+        min-width: 4rem !important;
+    }
+    
+    /* Adjust main content */
+    .sidebar-collapsed + main,
+    .sidebar-collapsed main {
+        padding-left: 4rem !important;
+        margin-left: 0 !important;
+        transition: padding-left 0.3s ease-in-out !important;
+    }
+    
+    .sidebar-expanded + main,
+    .sidebar-expanded main {
+        padding-left: 17rem !important;
+        margin-left: 0 !important;
+        transition: padding-left 0.3s ease-in-out !important;
+    }
+}
+
+/* Mobile behavior - leave unchanged */
+@media (max-width: 1023px) {
+    /* Disable all collapsible behavior on mobile */
+    .sidebar-collapsed,
+    .sidebar-expanded {
+        /* Let mobile hamburger menu handle everything */
+    }
+}
+
+/* Animation for content area */
+.main-content-area {
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar-collapsed + .main-content-area {
+    margin-left: var(--sidebar-width);
+}
+
+.sidebar-expanded + .main-content-area {
+    margin-left: var(--sidebar-width);
+}

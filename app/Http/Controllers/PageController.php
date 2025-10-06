@@ -296,6 +296,30 @@ class PageController extends Controller
         ])->withViewData(compact('serverSeo'));
     }
 
+    public function createArticle()
+    {
+        $sidebarSections = $this->getSidebarSections();
+        $serverSeo       = $this->defaultSeo();
+
+        return Inertia::render('create-article', [
+            'sidebarSections' => $sidebarSections,
+            'projects'        => $this->defaultProjects(),
+        ])->withViewData(compact('serverSeo'));
+    }
+
+    public function editArticle($id)
+    {
+        $page = Page::with(['sidebarItem.sidebarSection'])->findOrFail($id);
+        $sidebarSections = $this->getSidebarSections();
+        $serverSeo = $this->defaultSeo();
+
+        return Inertia::render('edit-article', [
+            'editingPage'     => $page,
+            'sidebarSections' => $sidebarSections,
+            'projects'        => $this->defaultProjects(),
+        ])->withViewData(compact('serverSeo'));
+    }
+
     public function generateArticleFromPrompt(Request $request)
     {
         $request->validate([

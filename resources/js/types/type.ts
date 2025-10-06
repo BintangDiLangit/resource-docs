@@ -41,4 +41,15 @@ export interface Page {
     slug: string
     content: string
     sidebar_item_id: number
+    sidebar_item?: {
+        id: number
+        title: string
+        url: string
+        sidebar_section?: {
+            id: number
+            title_section: string
+        }
+    }
+    created_at?: string
+    updated_at?: string
 }

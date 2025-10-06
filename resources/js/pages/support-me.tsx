@@ -2,7 +2,7 @@ import DonationCard from '@/components/donation-card'
 import { Project, SidebarSection } from '@/types/type'
 import { Container } from 'components/container'
 import { Header } from 'components/header'
-import { IconBrandInstagram, IconBrandJustd, IconBrandLinkedin, IconBrandMedium, IconBrandYoutube } from 'justd-icons'
+import { IconBrandInstagram, IconBrandJustd, IconBrandLinkedin, IconBrandYoutube } from 'justd-icons'
 import { Grid, Link } from 'ui'
 import { AppLayout } from '../layouts/app-layout'
 
@@ -71,7 +71,7 @@ const Home = ({ projects }: SupportMeProps) => {
                                         target="_blank"
                                         className="grid place-content-center size-12 outline-1 outline-border rounded-full"
                                     >
-                                        <IconBrandMedium />
+                                        <IconBrandJustd />
                                     </Link>
                                     <Link
                                         href="https://youtube.com/@BintangDiLangit"

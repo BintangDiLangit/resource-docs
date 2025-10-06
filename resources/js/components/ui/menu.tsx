@@ -89,12 +89,13 @@ const Content = <T extends object>({
     ...props
 }: MenuContentProps<T>) => {
     const { respectScreen } = React.useContext(MenuContext)
+    const { children, style, ...popoverProps } = props
     return (
         <Popover.Content
             respectScreen={respectScreen}
             showArrow={showArrow}
             className={popover({ className: popoverClassName })}
-            {...props}
+            {...popoverProps}
         >
             <MenuPrimitive className={menu({ className })} {...props} />
         </Popover.Content>
