@@ -75,7 +75,7 @@ const Trigger = ({ className, ...props }: MenuTriggerProps) => (
     </Button>
 )
 
-interface MenuContentProps<T> extends Omit<PopoverProps, 'children' | 'style'>, MenuPrimitiveProps<T> {
+interface MenuContentProps<T> extends Omit<PopoverProps, 'children' | 'style' | 'render'>, Omit<MenuPrimitiveProps<T>, 'render'> {
     className?: string
     popoverClassName?: string
     showArrow?: boolean

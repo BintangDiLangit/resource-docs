@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import type { Placement } from '@react-types/overlays'
+import type { Placement } from 'react-aria-components'
 import { IconChevronLgDown } from 'justd-icons'
 import type { ButtonProps } from 'react-aria-components'
 import {

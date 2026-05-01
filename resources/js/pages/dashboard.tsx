@@ -11,7 +11,7 @@ import {
     IconSettings, 
     IconTrash,
     IconBrain,
-    IconChart,
+    IconChartBar,
     IconClock
 } from 'justd-icons'
 import React from 'react'
@@ -118,7 +118,7 @@ export default function Dashboard({
                     <StatCard
                         title="Sidebar Items"
                         value={stats.total_sidebar_items}
-                        icon={IconChart}
+                        icon={IconChartBar}
                         color="purple"
                     />
                 </div>

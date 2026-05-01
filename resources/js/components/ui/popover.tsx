@@ -83,9 +83,9 @@ const drawerStyles = tv({
 })
 
 interface PopoverProps
-    extends Omit<React.ComponentProps<typeof Modal>, 'children'>,
-        Omit<PopoverPrimitiveProps, 'children' | 'className'>,
-        ModalOverlayProps {
+    extends Omit<React.ComponentProps<typeof Modal>, 'children' | 'render'>,
+        Omit<PopoverPrimitiveProps, 'children' | 'className' | 'render'>,
+        Omit<ModalOverlayProps, 'render'> {
     children: React.ReactNode
     className?: string | ((values: any & { defaultClassName?: string }) => string)
     showArrow?: boolean
