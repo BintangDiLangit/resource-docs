@@ -21,13 +21,11 @@ const DonationCard = ({ item }: DonationCardProp) => {
     return (
         <>
             <Card key={item.id}>
-                <div className="relative">
-                    <img src={item.imageUrl} alt={item.name} className="cursor-pointer" onClick={openModal} />
-                    <Card.Header>
-                        <Card.Title>{item.name}</Card.Title>
-                        <Card.Description>{item.description}</Card.Description>
-                    </Card.Header>
-                </div>
+                <img src={item.imageUrl} alt={item.name} className="cursor-pointer w-full" onClick={openModal} />
+                <Card.Header>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Description>{item.description}</Card.Description>
+                </Card.Header>
             </Card>
 
             {/* Modal for zoomed image */}
