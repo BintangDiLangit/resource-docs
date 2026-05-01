@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Card } from './ui'
 
 interface DonationCardItem {
     id: number
@@ -20,15 +19,19 @@ const DonationCard = ({ item }: DonationCardProp) => {
 
     return (
         <>
-            <Card key={item.id}>
-                <img src={item.imageUrl} alt={item.name} className="cursor-pointer w-full" onClick={openModal} />
-                <Card.Header>
-                    <Card.Title>{item.name}</Card.Title>
-                    <Card.Description>{item.description}</Card.Description>
-                </Card.Header>
-            </Card>
+            <div className="rounded-xl border border-border overflow-hidden bg-bg shadow-sm">
+                <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="cursor-pointer w-full block"
+                    onClick={openModal}
+                />
+                <div className="px-6 py-5 space-y-1.5">
+                    <p className="font-semibold leading-none tracking-tight break-all">{item.name}</p>
+                    <p className="text-sm text-muted-fg">{item.description}</p>
+                </div>
+            </div>
 
-            {/* Modal for zoomed image */}
             {isModalOpen && (
                 <div
                     className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
