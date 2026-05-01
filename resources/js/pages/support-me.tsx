@@ -9,18 +9,11 @@ import { AppLayout } from '../layouts/app-layout'
 const items = [
     {
         id: 1,
-        imageUrl: '/images/GOPAY.jpeg',
-        name: 'Bintang Miftaqul Huda.',
+        imageUrl: '/images/USDT.jpeg',
+        name: '0x2b1594b5e0ceb72aae2ecc0b2eb0a927352b82fd',
         icon: IconBrandJustd,
-        description: 'Gopay'
+        description: 'USDT ERC20'
     },
-    {
-        id: 2,
-        imageUrl: '/images/SHOPEE.png',
-        name: 'Bintang Miftaqul Huda.',
-        icon: IconBrandJustd,
-        description: 'Shopee'
-    }
 ]
 
 interface SupportMeProps {
